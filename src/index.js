@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
 const Button = (props) => {
-  // your code here
+  return (
+    <button onClick={() => props.reset()}>
+      {props.text}
+    </button>
+  );
 };
 
 const Application = () => {
 
-  // your code here
+  const [name, setName] = useState();
 
   const reset = () => {
-    console.log("reset");
-    // your code here
+    setName("");
+    console.log('hi');
   };
 
   return (
     <main>
-      {/* your code here -- this entire line including the curly braces can be removed */}
-      <h1>Hello React</h1>
+      <input
+        value = {name}
+        onChange = {(event) => {
+          setName(event.target.value);
+        }}
+        placeholder='type your name'/>
+      <Button text={'reset'} reset={reset} />
+
+      <Fragment>
+        {name && <h1>Hello {name}</h1>}
+      </Fragment>
+
     </main>
   );
 };
